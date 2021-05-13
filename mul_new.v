@@ -20,8 +20,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module mul_new(clk, rst, datain1, datain2, dataout1, dataout2 ,addrext, valid, zeros);
-
+module mul_new(clk, rst, datain1, datain2, dataout1, dataout2 ,addrext, valid, zeros, row_wire,col_wire,addrsp,addrrow,sparse,addrsp_copy);
+	input wire [31:0] row_wire, col_wire;
+   output reg [13:0] addrsp,addrsp_copy;
+   output reg [9:0] addrrow;
+    input wire [31:0] sparse;
     input clk, rst;
     input [31:0] datain1, datain2;
     output [9:0] addrext;
@@ -33,7 +36,18 @@ module mul_new(clk, rst, datain1, datain2, dataout1, dataout2 ,addrext, valid, z
     reg [4:0] sclk_counter;
     reg sclk;
     reg sclk_rst;
-    
+    always@(posedge clk)
+	begin
+	if(rst)
+	begin
+	addrsp_copy=0;
+	end
+	else begin
+	addrsp_copy=addrsp;
+	
+	end
+	
+	end
     always @ (posedge clk)
 	begin
 	
@@ -57,16 +71,14 @@ module mul_new(clk, rst, datain1, datain2, dataout1, dataout2 ,addrext, valid, z
        end
 	end
 	
-	wire [31:0] row_wire, col_wire;
-    reg [13:0] addrsp;
-    reg [9:0] addrrow;
-    wire [31:0] sparse;
+
     
     assign addrext = col_wire[9:0];
+	
     
-    blk_mem_gen_sparse spv_ram(.clka(clk), .addra(addrsp), .dina(32'b0), .douta(sparse), .wea(1'b0));
+   /*  blk_mem_gen_sparse spv_ram(.clka(clk), .addra(addrsp), .dina(32'b0), .douta(sparse), .wea(1'b0));
     blk_mem_gen_col col_ram(.clka(clk), .addra(addrsp), .dina(32'b0), .douta(col_wire),  .wea(1'b0));
-    blk_mem_gen_row_CSR row_ram(.clka(clk), .addra(addrrow), .dina(32'b0), .douta(row_wire), .wea(1'b0));
+    blk_mem_gen_row_CSR row_ram(.clka(clk), .addra(addrrow), .dina(32'b0), .douta(row_wire), .wea(1'b0)); */
     
     //wire [31:0] B [1:0];
     wire [63:0] P [0:1];
