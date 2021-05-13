@@ -18,15 +18,17 @@
 // Additional Comments:
 //
 //////////////////////////////////////////////////////////////////////////////////
-module topmod(clk,reset,input1,input2,op1,op2);
+module topmod(clk,reset,input1,input2,addrext,valid,zeros,op1,op2);
 
 input clk;
 input reset;
 input[31:0] input1;
 input [31:0]input2;
-output reg [63:0] op1;
-output reg [63:0] op2;
-
+output wire [63:0] op1;
+output wire [63:0] op2;
+output wire [9:0] addrext;
+output wire valid;
+output wire zeros;
 
 reg [13:0] address_val1,address_val2,address_col1,address_col2,address_row1,address_row2;
 reg [31:0] value_data_in1,value_data_in2;
@@ -40,5 +42,10 @@ blk_mem_gen_0 row_ram(.clka(clk), .addra(address_row1), .dina(row_data_in1), .do
 
 wire done;
  matrix(clk,reset,input1,input2,address_val1,address_val2,address_row1,address_row2,address_col1,address_col2,wea_value,web_value,wea_row,web_row,wea_col,web_col,value_data_in1,value_data_in2,row_data_in1,row_data_in2,column_data_in1,column_data_in2,done);
+
+
+mul_new(clk, reset, input1, input2, op1, op2 ,addrext, valid, zeros, dout_row1,dout_row2,address_val1,address_row1,dout_value1,address_col1);
+
+
 
 endmodule    
