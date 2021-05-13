@@ -38,7 +38,7 @@ module mul_new(clk, rst, datain1, datain2, dataout1, dataout2 ,addrext, valid, z
     reg sclk_rst;
     always@(posedge clk)
 	begin
-	if(rst)
+	if(!rst)
 	begin
 	addrsp_copy=0;
 	end
