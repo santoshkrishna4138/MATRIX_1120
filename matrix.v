@@ -76,9 +76,7 @@ counter_even c1(reset,clk,enablec,evenc);
 
 
 defparam a1.COUNT_LEN=13;
-
 defparam b1.COUNT_LEN=13;
-
 defparam c1.COUNT_LEN=9;
 
 
