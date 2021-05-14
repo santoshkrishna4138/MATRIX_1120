@@ -35,7 +35,11 @@ count=0;
 end
 else if(enable)
 begin
-count=count+1;
+//if(count)
+count=1;
+
+//count=1;
+//count=count+1;
 end
 else begin
 count=count;
