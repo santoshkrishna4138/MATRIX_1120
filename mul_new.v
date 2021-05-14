@@ -232,7 +232,7 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
         end
     end
 	
-	always@(done_counter,rst)
+	always@(posedge clk)
 	begin
 	if(!rst)
 	begin
