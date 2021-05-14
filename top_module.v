@@ -39,7 +39,7 @@ wire wea_value,web_value,wea_col,web_col,wea_row,web_row;
 
 blk_mem_gen_0 spv_ram(.clka(clk), .addra(address_val1), .dina(value_data_in1), .douta(dout_value1), .wea(wea_value), .clkb(clk),.web(web_value),.addrb(address_val2),.dinb(value_data_in2),.doutb(dout_value2));
 blk_mem_gen_0 col_ram(.clka(clk), .addra(address_col1), .dina(column_data_in1), .douta(dout_col1),  .wea(wea_col),   .clkb(clk),.web(web_col),.addrb(address_col2), .dinb(column_data_in2),.doutb(dout_col2)  );
-blk_mem_gen_0 row_ram(.clka(clk), .addra(address_row1), .dina(row_data_in1), .douta(dout_row1),     .wea(wea_row),   .clkb(clk),.web(web_row), .addrb(address_row2),.dinb(row_data_in2),doutb(dout_row2));
+blk_mem_gen_1 row_ram(.clka(clk), .addra(address_row1), .dina(row_data_in1), .douta(dout_row1),     .wea(wea_row),   .clkb(clk),.web(web_row), .addrb(address_row2),.dinb(row_data_in2),doutb(dout_row2));
 
 output wire done;
 wire [13:0]address_val1_matrix,address_col1_matrix;
