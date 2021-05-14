@@ -20,12 +20,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module mul_new(clk, rst, datain1, datain2, dataout1, dataout2 ,addrext, valid, zeros, row_wire,col_wire,addrsp,addrrow,sparse,addrsp_copy);
+module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, valid, zeros, row_wire,col_wire,addrsp,addrrow,sparse,addrsp_copy);
 	input wire [31:0] row_wire, col_wire;
    output reg [13:0] addrsp,addrsp_copy;
    output reg [9:0] addrrow;
     input wire [31:0] sparse;
-    input clk, rst;
+    input clk, rst,rst1;
     input [31:0] datain1, datain2;
     output [9:0] addrext;
     

@@ -43,8 +43,8 @@ blk_mem_gen_0 row_ram(.clka(clk), .addra(address_row1), .dina(row_data_in1), .do
 wire done;
 matrix(clk,reset,input1,input2,address_val1,address_val2,address_col1,address_col2,address_row1,address_row2,wea_value,web_value,wea_col,web_col,wea_row,web_row,value_data_in1,value_data_in2,column_data_in1,column_data_in2,row_data_in1,row_data_in2,done);
 
-
-mul_new(clk, reset, input1, input2, op1, op2 ,addrext, valid, zeros, dout_row1,dout_row2,address_val1,address_row1,dout_value1,address_col1);
+reg rst1;
+mul_new(clk, reset,rst1, input1, input2, op1, op2 ,addrext, valid, zeros, dout_row1,dout_row2,address_val1,address_row1,dout_value1,address_col1);
 
 
 
