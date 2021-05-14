@@ -28,8 +28,8 @@ output reg [13:0] addra;
 output reg [13:0] addrA;
 output reg [13:0] addrb;
 output reg [13:0] addrB;
-output reg [13:0] addrC;
-output reg [13:0] addrc;
+output reg [9:0] addrC;
+output reg [9:0] addrc;
 
 output reg wea;
 output reg weA;
@@ -75,11 +75,11 @@ counter_even b1(reset,clk,enableb,evenb);
 counter_even c1(reset,clk,enablec,evenc);
 
 
-defparam a1.COUNT_LEN=14;
+defparam a1.COUNT_LEN=13;
 
-defparam b1.COUNT_LEN=14;
+defparam b1.COUNT_LEN=13;
 
-defparam c1.COUNT_LEN=10;
+defparam c1.COUNT_LEN=9;
 
 
 

@@ -47,7 +47,7 @@ wire [13:0]address_val1_matrix,address_col1_matrix;
 wire [9:0] address_row1_matrix;
 wire wea_col_matrix,wea_row_matrix,wea_value_matrix,web_col_matrix,web_row_matrix,web_value_matrix;
 //matrix is having an active high signal as reset hence the !
-matrix(clk,((!reset)||(done_mul)),input1,input2,address_val1_matrix,address_val2,address_col1_matrix,address_col2,address_row1_matrix,address_row2,wea_value_matrix,web_value_matrix,wea_col_matrix,web_col_matrix,wea_row_matrix,web_row_matrix,value_data_in1,value_data_in2,column_data_in1,column_data_in2,row_data_in1,row_data_in2,done);
+matrix init_instance(clk,((!reset)||(done_mul)),input1,input2,address_val1_matrix,address_val2,address_col1_matrix,address_col2,address_row1_matrix,address_row2,wea_value_matrix,web_value_matrix,wea_col_matrix,web_col_matrix,wea_row_matrix,web_row_matrix,value_data_in1,value_data_in2,column_data_in1,column_data_in2,row_data_in1,row_data_in2,done);
 
 reg rst1;
 
@@ -55,7 +55,7 @@ wire [63:0] op1_mul,op2_mul;
 wire valid_mul,zeros_mul;
 wire [13:0] address_col1_mul,address_val1_mul;
 wire [9:0] address_row1_mul;
-mul_new(clk, (reset||(done)),rst1, input1, input2, op1_mul, op2_mul ,addrext, valid_mul, zeros_mul, dout_row1,dout_row2,address_val1_mul,address_row1_mul,dout_value1,address_col1_mul,done_mul);
+mul_new  mul_instance(clk, (reset||(done)),rst1, input1, input2, op1_mul, op2_mul ,addrext, valid_mul, zeros_mul, dout_row1,dout_row2,address_val1_mul,address_row1_mul,dout_value1,address_col1_mul,done_mul);
 
 assign op1=done?op1_mul:0;
 assign op2=done?op2_mul:0;
