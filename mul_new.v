@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, valid, zeros, row_wire,col_wire,addrsp,addrrow,sparse,addrsp_copy);
+module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, valid, zeros, row_wire,col_wire,addrsp,addrrow,sparse,addrsp_copy,done);
 	input wire [31:0] row_wire, col_wire;
    output reg [13:0] addrsp,addrsp_copy;
    output reg [9:0] addrrow;
@@ -28,11 +28,12 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
     input clk, rst,rst1;
     input [31:0] datain1, datain2;
     output [9:0] addrext;
+	output reg done;
     
     output [63:0] dataout1, dataout2;
     
     output reg valid, zeros;
-    
+    reg [9:0]done_counter;
     reg [4:0] sclk_counter;
     reg sclk;
     reg sclk_rst;
@@ -144,6 +145,7 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
         addrrow <= addrrow;
         bp <= 1;
         we_res <= 0;
+		done_counter<=0;
         addr_resa1 <= 0;
         addr_resb1 <= 0;
         add_counter <= add_counter;
@@ -156,6 +158,7 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
         addrrow <= 1;
         bp <= 1;
         we_res <= 0;
+		done_counter<=0;
         addr_resa1 <= 0;
         addr_resb1 <= 0;
         add_counter <= 1;
@@ -173,7 +176,8 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
         
         if(counter[11])
             we_res <= 1;
-        
+        if(counter[279]
+			done_counter<=done_counter+1;
         
         if(we_res)
         begin
@@ -228,4 +232,20 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
         end
     end
 	
+	always@(done_counter,rst)
+	begin
+	if(!rst)
+	begin
+	done=0;
+	end
+	else begin
+	if(done_counter==579)
+	begin
+	done=1;
+	end
+	else begin
+	done=0;
+	end
+	end
+	end
 endmodule
