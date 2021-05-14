@@ -149,7 +149,8 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
         addr_resa1 <= 0;
         addr_resb1 <= 0;
         add_counter <= add_counter;
-        valid <= 0;  
+        valid <= 0; 
+         zeros <= 0; 
     end
 	else begin
 	sclk_rst <= 0;
@@ -163,6 +164,7 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
         addr_resb1 <= 0;
         add_counter <= 1;
         valid <= 0;
+         zeros <= 0;
 	
 	end
 	end
