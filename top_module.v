@@ -41,10 +41,12 @@ blk_mem_gen_0 col_ram(.clka(clk), .addra(address_col1), .dina(column_data_in1), 
 blk_mem_gen_0 row_ram(.clka(clk), .addra(address_row1), .dina(row_data_in1), .douta(dout_row1),     .wea(wea_row),   .clkb(clk),.web(web_row), .addrb(address_row2),.dinb(row_data_in2),doutb(dout_row2));
 
 wire done;
-matrix(clk,reset,input1,input2,address_val1,address_val2,address_col1,address_col2,address_row1,address_row2,wea_value,web_value,wea_col,web_col,wea_row,web_row,value_data_in1,value_data_in2,column_data_in1,column_data_in2,row_data_in1,row_data_in2,done);
+//matrix is having an active high signal as reset hence the !
+matrix(clk,(!reset),input1,input2,address_val1,address_val2,address_col1,address_col2,address_row1,address_row2,wea_value,web_value,wea_col,web_col,wea_row,web_row,value_data_in1,value_data_in2,column_data_in1,column_data_in2,row_data_in1,row_data_in2,done);
 
 reg rst1;
-mul_new(clk, reset,rst1, input1, input2, op1, op2 ,addrext, valid, zeros, dout_row1,dout_row2,address_val1,address_row1,dout_value1,address_col1);
+mul_new(clk, (reset||(done)),rst1, input1, input2, op1, op2 ,addrext, valid, zeros, dout_row1,dout_row2,address_val1,address_row1,dout_value1,address_col1);
+
 
 
 
