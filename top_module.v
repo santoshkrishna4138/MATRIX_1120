@@ -55,7 +55,7 @@ wire [63:0] op1_mul,op2_mul;
 wire valid_mul,zeros_mul;
 wire [13:0] address_col1_mul,address_val1_mul;
 wire [9:0] address_row1_mul;
-mul_new  mul_instance(clk, (reset||(done)),rst1, input1, input2, op1_mul, op2_mul ,addrext, valid_mul, zeros_mul, dout_row1,dout_row2,address_val1_mul,address_row1_mul,dout_value1,address_col1_mul,done_mul);
+mul_new  mul_instance(clk, (reset&&(done)),rst1, input1, input2, op1_mul, op2_mul ,addrext, valid_mul, zeros_mul, dout_row1,dout_row2,address_val1_mul,address_row1_mul,dout_value1,address_col1_mul,done_mul);
 
 assign op1=done?op1_mul:0;
 assign op2=done?op2_mul:0;
