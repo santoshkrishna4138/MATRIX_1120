@@ -49,7 +49,7 @@ wire wea_col_matrix,wea_row_matrix,wea_value_matrix,web_col_matrix,web_row_matri
 //matrix is having an active high signal as reset hence the !
 matrix init_instance(clk,((!reset)||(done_mul)),input1,input2,address_val1_matrix,address_val2,address_col1_matrix,address_col2,address_row1_matrix,address_row2,wea_value_matrix,web_value_matrix,wea_col_matrix,web_col_matrix,wea_row_matrix,web_row_matrix,value_data_in1,value_data_in2,column_data_in1,column_data_in2,row_data_in1,row_data_in2,done);
 
-reg rst1;
+wire rst1;
 
 wire [63:0] op1_mul,op2_mul;
 wire valid_mul,zeros_mul;
@@ -71,7 +71,7 @@ assign web_col=done?0:web_col_matrix;
 assign web_row=done?0:web_row_matrix;
 assign web_value=done?0:web_value_matrix;
 wire count;
-counter top_count_instance(reset,clk,done,count);
+counter top_count_instance(!reset,clk,done,count);
 
 defparam top_count_instance.COUNT_LEN=0;
 
