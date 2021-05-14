@@ -137,7 +137,20 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
     always @ (posedge clk)
     if(!rst)
     begin
-        sclk_rst <= 0;
+    if(!rst1) begin  
+	 sclk_rst <= 0;
+        counter_rst <= 0;
+        addrsp <= 0;
+        addrrow <= addrrow;
+        bp <= 1;
+        we_res <= 0;
+        addr_resa1 <= 0;
+        addr_resb1 <= 0;
+        add_counter <= add_counter;
+        valid <= 0;  
+    end
+	else begin
+	sclk_rst <= 0;
         counter_rst <= 0;
         addrsp <= 0;
         addrrow <= 1;
@@ -147,7 +160,9 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
         addr_resb1 <= 0;
         add_counter <= 1;
         valid <= 0;
-    end
+	
+	end
+	end
     else
     begin
         counter_rst <= 1;
