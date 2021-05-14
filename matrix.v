@@ -146,9 +146,9 @@ case(state)
 `reset_state:  begin next_state=`statea;  end
  `statea: begin if(evena==14'd8734) next_state=`stateb; else next_state=`statea;  
  end
- `stateb: begin if(evena==14'd8734) next_state=`statec; else next_state=`stateb;  
+ `stateb: begin if(evenb==14'd8734) next_state=`statec; else next_state=`stateb;  
  end
- `statec: begin if(evena==10'd558) next_state=`enden; else next_state=`statec;  
+ `statec: begin if(evenc==10'd558) next_state=`enden; else next_state=`statec;  
  end
 `enden : begin next_state=`enden; end
 default : begin next_state=`reset_state; end
