@@ -70,5 +70,10 @@ assign wea_value=done?0:wea_value_matrix;
 assign web_col=done?0:web_col_matrix;
 assign web_row=done?0:web_row_matrix;
 assign web_value=done?0:web_value_matrix;
+wire count;
+counter top_count_instance(reset,clk,done,count);
 
+defparam top_count_instance.COUNT_LEN=0;
+
+assign rst1=count;
 endmodule    
