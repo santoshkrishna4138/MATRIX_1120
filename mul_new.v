@@ -176,8 +176,8 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
         
         if(counter[11])
             we_res <= 1;
-        if(counter[279]
-			done_counter<=done_counter+1;
+        if(counter[279])
+			done_counter <= done_counter+1;
         
         if(we_res)
         begin
