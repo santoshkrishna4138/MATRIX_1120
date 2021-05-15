@@ -129,11 +129,30 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
         counter <= {counter[280 - 2:0], counter[280 - 1]};
         
     reg [8:0] tempaddress1, tempaddress2;
-    reg [31:0] add_counter;
+    reg [31:0] add_counter,add_counter_copy_behind_by_one;
     
     wire L, G, E;
     
     comparator c(sclk, add_counter, row_wire, L, G, E);
+    
+    always@(valid,rst)
+    begin
+    if(!rst) begin
+    if(rst1) begin
+    add_counter_copy_behind_by_one<=add_counter_copy_behind_by_one;
+    end
+    else begin
+    add_counter_copy_behind_by_one<=0;
+    end
+    end
+    
+    else begin
+    add_counter_copy_behind_by_one<=add_counter-1;
+    
+    end
+    
+    end
+    
                     
     always @ (posedge clk)
     if(!rst)
@@ -142,13 +161,13 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
 	 sclk_rst <= 0;
         counter_rst <= 0;
         addrsp <= 0;
-        addrrow <= addrrow;
+        addrrow <= 0;
         bp <= 1;
         we_res <= 0;
 		done_counter<=0;
         addr_resa1 <= 0;
-        addr_resb1 <= 0;
-        add_counter <= add_counter;
+        addr_resb1 <= 1;
+        add_counter <= add_counter_copy_behind_by_one;
         valid <= 0; 
          zeros <= 0; 
     end
@@ -159,9 +178,9 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
         addrrow <= 1;
         bp <= 1;
         we_res <= 0;
-		done_counter<=0;
+		//done_counter<=0;
         addr_resa1 <= 0;
-        addr_resb1 <= 0;
+        addr_resb1 <= 1;
         add_counter <= 1;
         valid <= 0;
          zeros <= 0;
@@ -178,8 +197,8 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
         
         if(counter[11])
             we_res <= 1;
-        if(counter[279])
-			done_counter <= done_counter+1;
+       // if(counter[279])
+			//done_counter <= done_counter+1;
         
         if(we_res)
         begin
@@ -189,8 +208,8 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
                 addr_resa1 <= addr_resa1 + 1;
             
             case(addr_resa1)
-                270: addr_resb1 <= 0;
-                271: addr_resb1 <= 1;
+                270: addr_resb1 <= 0;//remove
+                271: addr_resb1 <= 1;//0...
                 272: addr_resb1 <= 2;
                 273: addr_resb1 <= 3;
                 274: addr_resb1 <= 4;
@@ -200,7 +219,7 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
                 278: addr_resb1 <= 8;
                 279: addr_resb1 <= 9;
                 
-                default: addr_resb1 <= addr_resa1 + 10;
+                default: addr_resb1 <= addr_resa1 + 10;//9
             endcase
             
             if(counter[5])
@@ -234,20 +253,48 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
         end
     end
 	
-	always@(posedge clk)
+	always@(rst,valid)
 	begin
 	if(!rst)
 	begin
-	done=0;
+	done_counter<=0;
 	end
 	else begin
-	if(done_counter==579)
+	if(valid)
 	begin
-	done=1;
+	done_counter<=done_counter+1;
 	end
 	else begin
-	done=0;
+	done_counter<=done_counter;
 	end
 	end
 	end
+	
+	always@(rst,valid,done_counter)
+	begin
+	if(!rst)
+	begin
+	done<=0;
+	
+	end
+	else begin
+	if(valid==1)
+	begin
+	done<=0;
+	end
+	else begin
+	if(done_counter==560)
+	done<=1;
+	else 
+	done<=0;
+	end
+	
+	
+	end
+	
+	
+	end
+	
+	
+	
 endmodule
