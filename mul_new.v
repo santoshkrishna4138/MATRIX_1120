@@ -97,10 +97,10 @@ module mul_new(clk, rst,rst1, datain1, datain2, dataout1, dataout2 ,addrext, val
     reg [8:0] addr_resa1, addr_resb1;
 
     
-    blk_mem_gen_2 B_res1(.clka(clk), .addra(addr_resa1), .dina(adder1), .wea(we_res), 
+    blk_mem_gen_2 B_res1(.clka(clk), .addra(addr_resa1), .dina(adder1), .wea(we_res), .web(1'b0),
                          .clkb(clk), .addrb(addr_resb1), .doutb(dataout1));
                          
-    blk_mem_gen_2 B_res2(.clka(clk), .addra(addr_resa1), .dina(adder2), .wea(we_res), 
+    blk_mem_gen_2 B_res2(.clka(clk), .addra(addr_resa1), .dina(adder2), .wea(we_res),.web(1'b0), 
                          .clkb(clk), .addrb(addr_resb1), .doutb(dataout2));
     
     

@@ -10261,7 +10261,7 @@ initial begin
 #400 value1=556;value2=557;
 #400 value1=558;value2=559;
 
-#34 value1=0;value2=1;
+#400 value1=0;value2=1;
 #400 value1=2;value2=3;
 #400 value1=4;value2=5;
 #400 value1=6;value2=7;
